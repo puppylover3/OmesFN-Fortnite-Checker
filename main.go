@@ -475,7 +475,7 @@ func AskForInboxKeyword() {
 }
 
 func loadSkinsList() {
-	absPath, err := filepath.Abs("Skinslist.omes")
+	absPath, err := filepath.Abs("Skinslist.stealth")
 	if err != nil {
 		LogWarning(fmt.Sprintf("Could not get absolute path for skin list: %v", err))
 		return
@@ -793,7 +793,7 @@ func main() {
 		LogInfo("╔════════════════════════════════════════╗")
 		LogInfo("║              Main Menu                 ║")
 		LogInfo("╠════════════════════════════════════════╣")
-		LogInfo("║ [1] Run FN Checker                     ║")
+		LogInfo("║ [1]  FN Checker                        ║")
 		LogInfo("║ [2] Bruter                             ║")
 		LogInfo("║ [3] Sort Logs                          ║")
 		LogInfo("║ [4] 2FA Bypass                         ║")
@@ -1035,7 +1035,7 @@ func displayDashboard() {
 	ClearConsole()
 
 	// Center the title
-	title := "OmesFN Menu"
+	title := "StealthFN Menu"
 	padding := (40 - len(title)) / 2
 	centeredTitle := strings.Repeat(" ", padding) + title
 	fmt.Printf("\n%s\n\n", centeredTitle)
@@ -1361,7 +1361,7 @@ func UpdateTitle(wg *sync.WaitGroup) {
 		cpm := atomic.LoadInt64(&Cpm)
 		atomic.StoreInt64(&Cpm, 0)
 		threadInfo := ""
-		title := fmt.Sprintf("OmesFN%s | Checked: %d/%d | Hits: %d | 2fa: %d | Epic 2fa: %d | CPM: %d | Time: %dm %ds",
+		title := fmt.Sprintf("StealthFN%s | Checked: %d/%d | Hits: %d | 2fa: %d | Epic 2fa: %d | CPM: %d | Time: %dm %ds",
 			threadInfo, Check, len(Ccombos), Hits, Twofa, EpicTwofa, cpm*60, minutes, seconds)
 		setConsoleTitle(title)
 		if dashboardEnabled {
@@ -1384,7 +1384,7 @@ func UpdateBypassTitle(wg *sync.WaitGroup) {
 	defer ticker.Stop()
 	for CheckerRunning {
 		<-ticker.C
-		title := fmt.Sprintf("OmesFN Bypass | Checked: %d/%d | Bypassed: %d | Fail: %d | Retries: %d",
+		title := fmt.Sprintf("StealthFN Bypass | Checked: %d/%d | Bypassed: %d | Fail: %d | Retries: %d",
 			Check, len(Ccombos), Hits, Bad, Retries)
 		setConsoleTitle(title)
 	}
@@ -1429,7 +1429,7 @@ func initDiscordRPC() {
 
 	err = client.SetActivity(client.Activity{
 		State:   "Connected",
-		Details: "OmesFN - Idle",
+		Details: "StealthFN - Idle",
 	})
 
 	if err != nil {
@@ -1451,7 +1451,7 @@ func initDiscordRPC() {
 				now := time.Now()
 				err := client.SetActivity(client.Activity{
 					State:   "Connected",
-					Details: "OmesFN - Idle",
+					Details: "StealthFN - Idle",
 					Timestamps: &client.Timestamps{
 						Start: &now,
 					},
@@ -1500,7 +1500,7 @@ func updateDiscordPresence(details, state string) {
 				"state":   state,
 				"assets": map[string]interface{}{
 					"large_image": "fortnite_logo",
-					"large_text":  "OmesFN Fortnite Checker",
+					"large_text":  "StealthFN Fortnite Checker",
 					"small_image": "checking",
 					"small_text":  "Active",
 				},
